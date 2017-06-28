@@ -6,23 +6,16 @@
     <span class="sub-text"></span>
     <div class="container">
         <div class="row">
-            <div class="col m10 s8">
               <div class="card  teal lighten-2 card-fade center-align">
                 <div class="card-content white-text teal lighten-2">
                     <form action="/visualize" method="POST" >
-                        <select name="viewData">
+                        <select name="viewData" onchange="this.form.submit()">
                           <option value="" disabled selected>Choose your option</option>
                           <option value="Rodent">Rodent Complaints</option>
                           <option value="2">Noise Complaints</option>
                           <option value="3">Complaints</option>
                       </select>
               </div>
-          </div>
-      </div>
-      <div class="col m2 s4" id="button-fade">
-         <button type="submit"><a id="next" class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">keyboard_arrow_right
-          </i></a></button>
-
       </div>
       </form>
   </div>

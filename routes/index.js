@@ -16,7 +16,14 @@ router.post('/visualize', (req, res, next)=>{
     res.render('map.html', {type: req.body.viewData})
 })
 
-router.get('/map', (req, res, next)=>{
+router.get('/rodents', (req, res, next)=>{
+    console.log("-------------------")
+    res.json({hello: 'hello'});
+});
+
+// add a param, : rodent etc. map script in the html will call this with different select values,
+// query, where all complaints equal the param type
+router.get('/map/:type', (req, res, next)=>{
     // 10010
     const neighborhoods = require('../zip-neighborhoods');
     var complaintCount = [['count', 'name']];

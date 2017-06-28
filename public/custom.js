@@ -18,4 +18,13 @@ $(document).ready(function() {
     $('select').material_select();
     $('.card-fade').delay(2500).fadeIn("slow");
     $('#button-fade').delay(2500).fadeIn("slow");
+    $('#change-data').change(function(){
+      console.log($( "#change-data" ).val());
+      $.ajax({
+         url: '/map/' + $( "#change-data" ).val(),
+         type: 'GET'
+      }).then(function(data){
+          console.log(data);
+      });
+    })
 });
