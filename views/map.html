@@ -1,0 +1,136 @@
+{% extends 'layout2.html' %}
+{% block content %}
+<div class="row">
+<div class="col l8">
+<div id="map" class="card"></div>
+</div>
+<div class="col l4">
+              <div class="card  teal lighten-2 center-align">
+                <div class="card-content white-text teal lighten-2">
+                    <form action="/visualize" method="POST" >
+                        <select name="viewData">
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="1">Rodent Complaints</option>
+                          <option value="2">Noise Complaints</option>
+                          <option value="3">Complaints</option>
+                      </select>
+              </div>
+          </div>
+
+        <div class="card-panel teal">
+            <h3>{{ type }} Complaints</h3>
+        <p>Neighborhood:</p><span class="white-text" id="hood"></span>
+         <p>Complaint Count</p> <span class="white-text" id="count"></span><br>
+        </div>
+
+</div>
+</div>
+      <script>
+        var map;
+        var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
+        function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 40.7831, lng: -73.9712},
+          zoomControl: true,
+          scrollwheel: false
+        });
+
+        function styleFeature(feature) {
+          var high = [5, 69, 54];  // color of smallest datum
+          var low = [151, 83, 34];   // color of largest datum
+
+          // delta represents where the value sits between the min and max
+          var delta = (feature.getProperty('count') - countMin) /
+              (countMax - countMin);
+
+          var color = [];
+          for (var i = 0; i < 3; i++) {
+            // calculate an integer color based on the delta
+            color[i] = (high[i] - low[i]) * delta + low[i];
+          }
+          return {
+            strokeColor: '#fff',
+            fillColor: 'hsl(' + color[0] + ',' + color[1] + '%,' + color[2] + '%)',
+            fillOpacity: 0.75,
+            strokeWeight: 2
+          };
+        }
+
+        function mouseInToRegion(e) {
+            // set the hover state so the setStyle function can change the border
+            e.feature.setProperty('state', 'hover');
+            console.log(e);
+            var percent = (e.feature.getProperty('count') - countMin) /
+                (countMax - countMin) * 100;
+            // console.log(e.feature.getProperty('count'));
+
+            // update the label
+            $('#hood').html(e.feature.getProperty('name'));
+            $('#count').html(e.feature.getProperty('count'));
+            // document.getElementById('stats').textContent =
+            //     e.feature.getProperty(e.feature.getProperty('count'));
+            // document.getElementById('data-value').textContent =
+            //     e.feature.getProperty('census_variable').toLocaleString();
+            // document.getElementById('data-box').style.display = 'block';
+            // document.getElementById('data-caret').style.display = 'block';
+            // document.getElementById('data-caret').style.paddingLeft = percent + '%';
+        }
+
+          /**
+           * Responds to the mouse-out event on a map shape (state).
+           *
+           * @param {?google.maps.MouseEvent} e
+           */
+          function mouseOutOfRegion(e) {
+            // reset the hover state, returning the border to normal
+            e.feature.setProperty('state', 'normal');
+          }
+
+
+        $(document).ready(function(){
+          map.data.loadGeoJson('geoManhattan.json', { idPropertyName: 'name' }, function(Array){
+              $.get("http://localhost:3000/map", function(data){
+                data.shift();
+                data.forEach(function(row){
+                  const count = parseFloat(row[0]);
+                  const name = row[1];
+                  if (count < countMin) {
+                    countMin = count;
+                  }
+                  if (count > countMax) {
+                    countMax = count;
+                  }
+                  map.data.getFeatureById(name).setProperty('count', count);
+                });
+            });
+                map.data.setStyle(styleFeature);
+                map.data.addListener('mouseover', mouseInToRegion);
+                map.data.addListener('mouseout', mouseOutOfRegion);
+              // map.data.setStyle(function(feature) {
+              //   var color = 'gray';
+              //   return /** @type {google.maps.Data.StyleOptions} */({
+              //     fillColor: feature.getProperty('color'),
+              //     strokeColor: color,
+              //     strokeWeight: 2
+              //   });
+              // });
+          });
+        });
+
+        // // When the user hovers, tempt them to click by outlining the letters.
+        // // Call revertStyle() to remove all overrides. This will use the style rules
+        // // defined in the function passed to setStyle()
+        // map.data.addListener('mouseover', function(event) {
+        //   map.data.revertStyle();
+        //   map.data.overrideStyle(event.feature, {strokeWeight: 8});
+        // });
+
+        // map.data.addListener('mouseout', function(event) {
+        //   map.data.revertStyle();
+        // });
+        }
+      </script>
+{% endblock %}
+
+

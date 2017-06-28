@@ -10,6 +10,12 @@ router.get('/', (req, res, next)=>{
     res.render('home.html');
 });
 
+router.post('/visualize', (req, res, next)=>{
+    console.log(req.body.viewData);
+    console.log(req.params);
+    res.render('map.html', {type: req.body.viewData})
+})
+
 router.get('/map', (req, res, next)=>{
     // 10010
     const neighborhoods = require('../zip-neighborhoods');
