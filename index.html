@@ -2,17 +2,17 @@
   <head>
     <title>Simple login</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">  </script>
-    <script>
-      $(document).ready(function(){
-          $.get("http://localhost:3000/map", function(data){
-            if(data==='done')
-              {
-                alert("login success");
-              }
-              console.log(JSON.stringify(data));
+    <script src="typed.js"></script>
+    <script src="test.js"></script>
+        <script>
+          $(function(){
+            $(".element").typed({
+              strings: ["First sentence.", "Second sentence."],
+              typeSpeed: 0
+            });
           });
-        });
-    </script>
+        </script>
+      <span class="element"></span>
   </head>
   <body>
     <h1>Hello people !</h1>

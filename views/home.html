@@ -1,0 +1,258 @@
+{% extends 'layout2.html'%}
+{% block content %}
+<div id="home-map"></div>
+<div class="container center-align card  grey lighten-4" id="home-container">
+    <span class="home-text"></span><br>
+    <span class="sub-text"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col m10 s8">
+              <div class="card  teal lighten-2 card-fade center-align">
+                <div class="card-content white-text teal lighten-2">
+                    <select>
+                      <option value="" disabled selected>Choose your option</option>
+                      <option value="1">Rodent Complaints</option>
+                      <option value="2">Noise Complaints</option>
+                      <option value="3">Complaints</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+      <div class="col m2 s4" id="button-fade">
+          <a id="next" class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">keyboard_arrow_right
+          </i></a>
+
+      </div>
+  </div>
+</div>
+</div>
+<script>
+    var map;
+    function initMap() {
+        console.log('hello');
+        map = new google.maps.Map(document.getElementById('home-map'), {
+          zoom: 10,
+          center: {lat: 40.7831, lng: -73.9712},
+          zoomControl: false,
+          scrollwheel: false,
+          disableDefaultUI: true,
+          styles:[
+          {
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#f5f5f5"
+            }
+            ]
+        },
+        {
+            "elementType": "labels.icon",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#616161"
+            }
+            ]
+        },
+        {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+            {
+                "color": "#f5f5f5"
+            }
+            ]
+        },
+        {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#bdbdbd"
+            }
+            ]
+        },
+        {
+            "featureType": "landscape.natural.terrain",
+            "elementType": "geometry.fill",
+            "stylers": [
+            {
+                "color": "#d9efee"
+            },
+            {
+                "weight": 1.5
+            }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#eeeeee"
+            }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#757575"
+            }
+            ]
+        },
+        {
+            "featureType": "poi.business",
+            "elementType": "geometry.fill",
+            "stylers": [
+            {
+                "color": "#afebe7"
+            }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#e5e5e5"
+            }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#9e9e9e"
+            }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#ffffff"
+            }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#757575"
+            }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#dadada"
+            }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.fill",
+            "stylers": [
+            {
+                "color": "#3caa9c"
+            },
+            {
+                "saturation": 20
+            },
+            {
+                "weight": 0.5
+            }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [
+            {
+                "weight": 1
+            }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#616161"
+            }
+            ]
+        },
+        {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#9e9e9e"
+            }
+            ]
+        },
+        {
+            "featureType": "transit.line",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#e5e5e5"
+            }
+            ]
+        },
+        {
+            "featureType": "transit.station",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#eeeeee"
+            }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#c9c9c9"
+            }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry.fill",
+            "stylers": [
+            {
+                "color": "#d9efee"
+            }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#9e9e9e"
+            }
+            ]
+        }
+        ]
+
+    });
+}
+</script>
+
+{% endblock %}

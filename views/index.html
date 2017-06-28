@@ -1,15 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-  <script>
-      var map;
-      function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: {lat: -28, lng: 137}
-      });
-      // NOTE: This uses cross-domain XHR, and may not work on older browsers.
-      map.data.loadGeoJson('geoManhattan.json');
-      }
-  </script>
+    <script>
+      $(function(){
+            $(".element").typed({
+              strings: ["First sentence.", "Second sentence."],
+              typeSpeed: 0
+            });
+          });
+        </script>
+      <span class="element"></span>
 {% endblock %}

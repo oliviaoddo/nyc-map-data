@@ -1,0 +1,60 @@
+.home-text{
+    font-size: 3em;
+    font-weight: 300;
+}
+
+.sub-text{
+    font-size: 2em;
+    font-weight: 100;
+}
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+    font-size: 2em;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+
+.select-wrapper input.select-dropdown {
+    border-bottom: 1px solid white;
+
+}
+
+#home-map{
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  top: 0;
+  left: 0;
+  z-index: 0; /* Set z-index to 0 as it will be on a layer below the contact form */
+}
+
+#home-container{
+  position: relative;
+  z-index: 1; /* The z-index should be higher than Google Maps */
+  margin: 15% auto 0;
+  padding: 2%;
+  height: auto;
+  opacity: .95;
+}
+
+#next{
+    margin-top: 30px;
+}
+

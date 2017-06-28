@@ -7,7 +7,7 @@ var Promise = require("bluebird");
 var fs = require('fs');
 
 router.get('/', (req, res, next)=>{
-    res.sendfile('./views/layout.html');
+    res.render('home.html');
 });
 
 router.get('/map', (req, res, next)=>{
