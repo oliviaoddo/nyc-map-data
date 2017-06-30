@@ -13,7 +13,7 @@
     -webkit-animation: blink 0.7s infinite;
     -moz-animation: blink 0.7s infinite;
     animation: blink 0.7s infinite;
-    font-size: 2em;
+    font-size: 3em;
 }
 @keyframes blink{
     0% { opacity:1; }
@@ -36,14 +36,20 @@
 
 }
 
+#rodent-map, #noise-map, #firework-map{
+  height: 100vh;
+  width: 100vw;
+}
+
 #home-map{
-  height: 100%;
+  height: 75vh;
   width: 100%;
   position:absolute;
   top: 0;
   left: 0;
-  z-index: 0; /* Set z-index to 0 as it will be on a layer below the contact form */
+  z-index: 0;  Set z-index to 0 as it will be on a layer below the contact form
 }
+
 
 #home-container{
   position: relative;
@@ -78,5 +84,9 @@ button:focus {
     outline: none;
     background-color: transparent;
 }
+
+.parallax-container {
+    height: 650px;
+  }
 
 

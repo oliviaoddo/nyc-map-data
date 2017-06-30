@@ -10,7 +10,7 @@ router.get('/', (req, res, next)=>{
     res.render('home.html');
 });
 
-router.post('/visualize', (req, res, next)=>{
+router.get('/visualize', (req, res, next)=>{
     console.log(req.body.viewData);
     console.log(req.params);
     res.render('map.html', {type: req.body.viewData})
@@ -23,7 +23,7 @@ router.get('/rodents', (req, res, next)=>{
 
 // add a param, : rodent etc. map script in the html will call this with different select values,
 // query, where all complaints equal the param type
-router.get('/map/:type', (req, res, next)=>{
+router.get('/map/rodent', (req, res, next)=>{
     // 10010
     const neighborhoods = require('../zip-neighborhoods');
     var complaintCount = [['count', 'name']];
@@ -44,7 +44,7 @@ router.get('/map/:type', (req, res, next)=>{
 
     Promise.map(objKeys,(key)=>{
          return Promise.reduce(neighborhoods[key], function(acc, value){
-            return models.AllComplaints.count({where: {zipcode: value}})
+            return models.AllComplaints.count({where: {zipcode: value }})
             .then(function(contents){
                 return acc + contents;
             });
