@@ -1,9 +1,8 @@
 $(document).ready(function() {
-     $(document).ready(function(){
-      $('.parallax').parallax();
-    });
+    $('.parallax').parallax();
     $('.card-fade').hide();
     $('#button-fade').hide();
+    $('#rat-card').hide();
     $(function(){
         $(".home-text").typed({
           strings: ["Visualize NYC data."],

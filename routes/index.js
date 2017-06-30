@@ -70,4 +70,22 @@ router.get('/map/rodent', (req, res, next)=>{
     // send an object that has properties of each neighborhood with a value of the sum
 });
 
+
+router.get('/map/noise', (req, res, next)=>{
+    var complaintCenters = {};
+
+    models.AllComplaints.findAll()
+    .then(complaintArr=>{
+        return complaintArr.forEach(el => {
+            complaintCenters[el.id] = {
+                center : {lat: Number(el.latitude), lng: Number(el.longitude)}
+            };
+        });
+    })
+    .then(obj =>{
+        res.json(complaintCenters);
+    })
+    .catch(console.log);
+});
+
 module.exports = router;

@@ -36,7 +36,7 @@
 
 }
 
-#rodent-map, #noise-map, #firework-map{
+#noise-map, #firework-map{
   height: 100vh;
   width: 100vw;
 }
@@ -47,9 +47,16 @@
   position:absolute;
   top: 0;
   left: 0;
-  z-index: 0;  Set z-index to 0 as it will be on a layer below the contact form
+  z-index: 0;  /*Set z-index to 0 as it will be on a layer below the contact form*/
 }
 
+
+#rodent-map{
+  height: 100vh;
+  width: 100%;
+  position:absolute;
+  z-index: 0;  /*Set z-index to 0 as it will be on a layer below the contact form*/
+}
 
 #home-container{
   position: relative;
@@ -58,6 +65,16 @@
   padding: 2%;
   height: auto;
   opacity: .95;
+}
+
+#rat-container{
+  position: relative;
+  z-index: 1; /* The z-index should be higher than Google Maps */
+  margin: 15% auto 0;
+  padding: 2%;
+  height: auto;
+  opacity: .95;
+  margin-left: 5%;
 }
 
 #next{

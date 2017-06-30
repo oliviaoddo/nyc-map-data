@@ -243,15 +243,16 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
 
         function mouseInToRegion(e) {
             // set the hover state so the setStyle function can change the border
+            $('#rat-card').fadeIn('slow');
             e.feature.setProperty('state', 'hover');
             var percent = (e.feature.getProperty('count') - countMin) /
                 (countMax - countMin) * 100;
             // console.log(e.feature.getProperty('count'));
 
             // update the label
-            console.log(e.feature.getProperty('name'));
-            $('#hood').html(e.feature.getProperty('name'));
-            $('#count').html(e.feature.getProperty('count'));
+            // $('#rodent-map').append($('div').html(e.feature.getProperty('name')));
+            $('#rat-hood').text("Neighborhood: " + e.feature.getProperty('name'));
+            $('#rat-count').text("Count: " + e.feature.getProperty('count'));
             // document.getElementById('stats').textContent =
             //     e.feature.getProperty(e.feature.getProperty('count'));
             // document.getElementById('data-value').textContent =
@@ -299,6 +300,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
           styles: mapStyles
         });
 
+
         $(document).ready(function(){
         map2.data.loadGeoJson('geoManhattan.json', { idPropertyName: 'name' }, function(Array){
           $.get("/map/rodent", function(data){
@@ -328,6 +330,21 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
           //   });
           // });
       });
+        $.get("/map/noise", function(data){
+            for(key in data){
+            var cityCircle = new google.maps.Circle({
+            strokeColor: '#ffb74d',
+              strokeOpacity: 0,
+              strokeWeight: 1,
+              fillColor: '#ffb74d',
+              fillOpacity: 0.3,
+              map: map3,
+              center: data[key].center,
+              radius: 100
+            });
+
+            }
+        });
     });
 }
 
