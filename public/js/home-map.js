@@ -332,15 +332,22 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
       });
         $.get("/map/noise", function(data){
             for(key in data){
-            var cityCircle = new google.maps.Circle({
-            strokeColor: '#ffb74d',
-              strokeOpacity: 0,
-              strokeWeight: 1,
-              fillColor: '#ffb74d',
-              fillOpacity: 0.3,
+            // var cityCircle = new google.maps.Circle({
+            // strokeColor: '#ffb74d',
+            //   strokeOpacity: 0,
+            //   strokeWeight: 1,
+            //   fillColor: '#ffb74d',
+            //   fillOpacity: 0.3,
+            //   map: map3,
+            //   center: data[key].center,
+            //   radius: 100
+            // });
+
+            var cityCircle = new google.maps.Marker({
               map: map3,
-              center: data[key].center,
-              radius: 100
+              position: data[key].center,
+              icon: 'images/icon3.png'
+
             });
 
             }
