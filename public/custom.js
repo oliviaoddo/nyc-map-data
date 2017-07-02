@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('.parallax').parallax();
     $('.card-fade').hide();
     $('#button-fade').hide();
-    $('#rat-card').hide();
+    $('#noise-card').hide();
     $(function(){
         $(".home-text").typed({
           strings: ["Visualize NYC data."],

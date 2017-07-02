@@ -19,7 +19,36 @@ var AllComplaints = db.define('all_complaints', {
     }
 );
 
+
+var Noise = db.define('noise', {
+    date: Sequelize.STRING,
+    type: Sequelize.STRING,
+    zipcode: Sequelize.STRING,
+    borough: Sequelize.STRING,
+    latitude: Sequelize.STRING,
+    longitude: Sequelize.STRING,
+    location: Sequelize.TEXT
+}, {
+    timestamps: false
+    }
+);
+
+var Graffiti = db.define('graffiti', {
+   date: Sequelize.STRING,
+    type: Sequelize.STRING,
+    zipcode: Sequelize.STRING,
+    borough: Sequelize.STRING,
+    latitude: Sequelize.STRING,
+    longitude: Sequelize.STRING,
+    location: Sequelize.TEXT
+}, {
+    timestamps: false
+    }
+    );
+
 module.exports = {
     db: db,
-    AllComplaints: AllComplaints
+    AllComplaints: AllComplaints,
+    Noise: Noise,
+    Graffiti: Graffiti
 };

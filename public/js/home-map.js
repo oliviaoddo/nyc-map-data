@@ -3,6 +3,7 @@ var map2;
 var map3;
 var map4;
 
+
 const mapStyles = [
           {
             "elementType": "geometry",
@@ -220,14 +221,28 @@ const mapStyles = [
 
 var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
     function initMap() {
+        var orangeArr = ['#e0f2f1', '#b2dfdb', '#80cbc4', '#4db6ac', '#26a69a', '#009688','#00897b', '#00796b', '#00695c', '#004d40'];
+        function getColor(percent){
+            if(percent <= 10) return orangeArr[0];
+            else if(percent <= 20) return orangeArr[1];
+            else if(percent <= 30) return orangeArr[2];
+            else if(percent <= 40) return orangeArr[3];
+            else if(percent <= 50) return orangeArr[4];
+            else if(percent <= 60) return orangeArr[5];
+            else if(percent <= 70) return orangeArr[6];
+            else if(percent <= 80) return orangeArr[7];
+            else if(percent <= 90) return orangeArr[8];
+            else if(percent <= 100) return orangeArr[9];
+        }
         function styleFeature(feature) {
+
           var high = [5, 69, 54];  // color of smallest datum
           var low = [151, 83, 34];   // color of largest datum
 
           // delta represents where the value sits between the min and max
           var delta = (feature.getProperty('count') - countMin) /
               (countMax - countMin);
-
+              console.log(feature.getProperty('count'), (delta*100));
           var color = [];
           for (var i = 0; i < 3; i++) {
             // calculate an integer color based on the delta
@@ -235,7 +250,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
           }
           return {
             strokeColor: '#fff',
-            fillColor: 'hsl(' + color[0] + ',' + color[1] + '%,' + color[2] + '%)',
+            fillColor: getColor(parseInt(delta*100)),
             fillOpacity: 0.75,
             strokeWeight: 2
           };
@@ -243,7 +258,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
 
         function mouseInToRegion(e) {
             // set the hover state so the setStyle function can change the border
-            $('#rat-card').fadeIn('slow');
+            $('#noise-card').fadeIn('slow');
             e.feature.setProperty('state', 'hover');
             var percent = (e.feature.getProperty('count') - countMin) /
                 (countMax - countMin) * 100;
@@ -251,8 +266,8 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
 
             // update the label
             // $('#rodent-map').append($('div').html(e.feature.getProperty('name')));
-            $('#rat-hood').text("Neighborhood: " + e.feature.getProperty('name'));
-            $('#rat-count').text("Count: " + e.feature.getProperty('count'));
+            $('#noise-hood').text("Neighborhood: " + e.feature.getProperty('name'));
+            $('#noise-count').text("Count: " + e.feature.getProperty('count'));
             // document.getElementById('stats').textContent =
             //     e.feature.getProperty(e.feature.getProperty('count'));
             // document.getElementById('data-value').textContent =
@@ -272,7 +287,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
             e.feature.setProperty('state', 'normal');
           }
 
-        map2 = new google.maps.Map(document.getElementById('rodent-map'), {zoom: 12, center: {lat: 40.7831, lng: -73.9712}, zoomControl: false,
+        map2 = new google.maps.Map(document.getElementById('rodent-map'), {zoom: 12, center: {lat: 40.7831, lng: -73.9712}, zoomControl: true,
           scrollwheel: false,
           disableDefaultUI: true,
             styles: mapStyles
@@ -303,7 +318,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
 
         $(document).ready(function(){
         map2.data.loadGeoJson('geoManhattan.json', { idPropertyName: 'name' }, function(Array){
-          $.get("/map/rodent", function(data){
+          $.get("/map/noise", function(data){
             data.shift();
             data.forEach(function(row){
               const count = parseFloat(row[0]);
@@ -318,6 +333,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
               $('#complaint-header').text($( "#change-data option:selected" ).text());
             });
         });
+
             map2.data.setStyle(styleFeature);
             map2.data.addListener('mouseover', mouseInToRegion);
             map2.data.addListener('mouseout', mouseOutOfRegion);
@@ -330,7 +346,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
           //   });
           // });
       });
-        $.get("/map/noise", function(data){
+        $.get("/map/rodent", function(data){
             for(key in data){
             // var cityCircle = new google.maps.Circle({
             // strokeColor: '#ffb74d',
@@ -343,7 +359,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
             //   radius: 100
             // });
 
-            var cityCircle = new google.maps.Marker({
+            var ratDot = new google.maps.Marker({
               map: map3,
               position: data[key].center,
               icon: 'images/icon3.png'
@@ -352,6 +368,8 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
 
             }
         });
+
+
     });
 }
 

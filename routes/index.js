@@ -23,7 +23,7 @@ router.get('/rodents', (req, res, next)=>{
 
 // add a param, : rodent etc. map script in the html will call this with different select values,
 // query, where all complaints equal the param type
-router.get('/map/rodent', (req, res, next)=>{
+router.get('/map/noise', (req, res, next)=>{
     // 10010
     const neighborhoods = require('../zip-neighborhoods');
     var complaintCount = [['count', 'name']];
@@ -44,7 +44,7 @@ router.get('/map/rodent', (req, res, next)=>{
 
     Promise.map(objKeys,(key)=>{
          return Promise.reduce(neighborhoods[key], function(acc, value){
-            return models.AllComplaints.count({where: {zipcode: value }})
+            return models.Noise.count({where: {zipcode: value }})
             .then(function(contents){
                 return acc + contents;
             });
@@ -71,7 +71,7 @@ router.get('/map/rodent', (req, res, next)=>{
 });
 
 
-router.get('/map/noise', (req, res, next)=>{
+router.get('/map/rodent', (req, res, next)=>{
     var complaintCenters = {};
 
     models.AllComplaints.findAll()
@@ -84,6 +84,22 @@ router.get('/map/noise', (req, res, next)=>{
     })
     .then(obj =>{
         res.json(complaintCenters);
+    })
+    .catch(console.log);
+});
+
+
+router.get('/map/graffiti', (req, res, next)=>{
+    // var complaintCenters = [];
+
+    models.Graffiti.findAll()
+    .then(complaintArr=>{
+        return complaintArr.map(el => {
+            return el.location;
+        });
+    })
+    .then(heatMapLocations =>{
+        res.json(heatMapLocations);
     })
     .catch(console.log);
 });
