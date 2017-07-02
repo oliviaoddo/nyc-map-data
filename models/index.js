@@ -50,5 +50,5 @@ module.exports = {
     db: db,
     AllComplaints: AllComplaints,
     Noise: Noise,
-    Graffiti: Graffiti
+    Graffiti: Graffiti,
 };

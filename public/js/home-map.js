@@ -2,6 +2,7 @@ var map;
 var map2;
 var map3;
 var map4;
+var heatmap;
 
 
 const mapStyles = [
@@ -242,7 +243,6 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
           // delta represents where the value sits between the min and max
           var delta = (feature.getProperty('count') - countMin) /
               (countMax - countMin);
-              console.log(feature.getProperty('count'), (delta*100));
           var color = [];
           for (var i = 0; i < 3; i++) {
             // calculate an integer color based on the delta
@@ -299,6 +299,22 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
             styles: mapStyles
         });
 
+        var gradient = [
+            'rgba(251, 233, 231, 0)',
+            'rgba(251, 233, 231, 1)',
+            'rgba(255, 204, 188, 1)',
+            'rgba(255, 171, 145, 1)',
+            'rgba(255, 138, 101, 1)',
+            'rgba(255, 112, 67, 1)',
+            'rgba(255, 87, 34, 1)',
+            'rgba(244, 81, 30, 1)',
+            'rgba(230, 74, 25, 1)',
+            'rgba(216, 67, 21, 1)',
+            'rgba(191, 54, 12, 1)',
+        ]
+
+
+
          map4 = new google.maps.Map(document.getElementById('firework-map'), {zoom: 12, center: {lat: 40.6535528, lng: -73.9476001}, zoomControl: false,
           scrollwheel: false,
           disableDefaultUI: true,
@@ -318,7 +334,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
 
         $(document).ready(function(){
         map2.data.loadGeoJson('geoManhattan.json', { idPropertyName: 'name' }, function(Array){
-          $.get("/map/noise", function(data){
+          $.get("/map/food", function(data){
             data.shift();
             data.forEach(function(row){
               const count = parseFloat(row[0]);
@@ -346,8 +362,8 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
           //   });
           // });
       });
-        $.get("/map/rodent", function(data){
-            for(key in data){
+        $.get("/map/noise", function(data){
+            // for(key in data){
             // var cityCircle = new google.maps.Circle({
             // strokeColor: '#ffb74d',
             //   strokeOpacity: 0,
@@ -358,14 +374,33 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
             //   center: data[key].center,
             //   radius: 100
             // });
-            var ratDot = new google.maps.Marker({
-              map: map3,
-              position: data[key].center,
-              icon: 'images/icon3.png'
+            // var ratDot = new google.maps.Marker({
+            //   map: map3,
+            //   position: data[key].center,
+            //   icon: 'images/icon3.png'
 
+            // });
+
+            // }
+
+            var latlongs = data.map(function(el){
+                return new google.maps.LatLng(el[0], el[1])
             });
 
-            }
+            Promise.all(latlongs)
+            .then(function(latlongArr){
+                heatmap = new google.maps.visualization.HeatmapLayer({
+                data: latlongArr,
+                opacity: 1,
+                maxIntensity: 100,
+                gradient: gradient
+                });
+            })
+            .then(function(){
+                heatmap.setMap(map3);
+            })
+            .catch(console.log);
+
         });
 
 

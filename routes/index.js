@@ -23,7 +23,7 @@ router.get('/rodents', (req, res, next)=>{
 
 // add a param, : rodent etc. map script in the html will call this with different select values,
 // query, where all complaints equal the param type
-router.get('/map/noise', (req, res, next)=>{
+router.get('/map/food', (req, res, next)=>{
     // 10010
     const neighborhoods = require('../zip-neighborhoods');
     var complaintCount = [['count', 'name']];
@@ -44,7 +44,7 @@ router.get('/map/noise', (req, res, next)=>{
 
     Promise.map(objKeys,(key)=>{
          return Promise.reduce(neighborhoods[key], function(acc, value){
-            return models.Noise.count({where: {zipcode: value }})
+            return models.AllComplaints.count({where: {zipcode: value }})
             .then(function(contents){
                 return acc + contents;
             });
@@ -71,21 +71,32 @@ router.get('/map/noise', (req, res, next)=>{
 });
 
 
-router.get('/map/rodent', (req, res, next)=>{
-    var complaintCenters = {};
+router.get('/map/noise', (req, res, next)=>{
+    // var complaintCenters = {};
 
-    models.AllComplaints.findAll()
-    .then(complaintArr=>{
-        return complaintArr.forEach(el => {
-            complaintCenters[el.id] = {
-                center : {lat: Number(el.latitude), lng: Number(el.longitude)}
-            };
-        });
-    })
-    .then(obj =>{
-        res.json(complaintCenters);
-    })
-    .catch(console.log);
+    // models.AllComplaints.findAll()
+    // .then(complaintArr=>{
+    //     return complaintArr.forEach(el => {
+    //         complaintCenters[el.id] = {
+    //             center : {lat: Number(el.latitude), lng: Number(el.longitude)}
+    //         };
+    //     });
+    // })
+    // .then(obj =>{
+    //     res.json(complaintCenters);
+    // })
+    // .catch(console.log);
+
+        models.Noise.findAll()
+        .then(complaintArr=>{
+            return complaintArr.map(el => {
+                return [Number(el.latitude), Number(el.longitude)];
+            });
+        })
+        .then(heatMapLocations =>{
+            res.json(heatMapLocations);
+        })
+        .catch(console.log);
 });
 
 
