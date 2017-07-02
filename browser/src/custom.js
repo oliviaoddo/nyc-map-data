@@ -1,4 +1,4 @@
-$(document).ready(function() {
+const custom = $('document').ready(function(){
     $('.parallax').parallax();
     $('.card-fade').hide();
     $('#button-fade').hide();
@@ -23,3 +23,5 @@ $(document).ready(function() {
     $('.card-fade').delay(2500).fadeIn("slow");
     $('#button-fade').delay(2500).fadeIn("slow");
 });
+export default custom;
+

@@ -31,7 +31,7 @@ models.db.sync({force: false})
     });
 })
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/browser')));
 
 // modular routing that uses io inside it
 app.use('/', makesRouter);

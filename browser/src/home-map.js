@@ -1,8 +1,4 @@
-var map;
-var map2;
-var map3;
-var map4;
-var heatmap;
+let map, map2, map3, map4, heatmap;
 
 
 const mapStyles = [{
@@ -147,11 +143,11 @@ const mapStyles = [{
     }]
 }];
 
-var countMin = Number.MAX_VALUE,
+let countMin = Number.MAX_VALUE,
     countMax = -Number.MAX_VALUE;
 
 function initMap() {
-    var orangeArr = ['#e0f2f1', '#b2dfdb', '#80cbc4', '#4db6ac', '#26a69a', '#009688', '#00897b', '#00796b', '#00695c', '#004d40'];
+    const blueArr = ['#e0f2f1', '#b2dfdb', '#80cbc4', '#4db6ac', '#26a69a', '#009688', '#00897b', '#00796b', '#00695c', '#004d40'];
 
     function getColor(percent) {
         if (percent <= 10) return orangeArr[0];
@@ -168,13 +164,13 @@ function initMap() {
 
     function styleFeature(feature) {
 
-        var high = [5, 69, 54]; // color of smallest datum
-        var low = [151, 83, 34]; // color of largest datum
+        const high = [5, 69, 54]; // color of smallest datum
+        const low = [151, 83, 34]; // color of largest datum
 
         // delta represents where the value sits between the min and max
-        var delta = (feature.getProperty('count') - countMin) /
+        let delta = (feature.getProperty('count') - countMin) /
             (countMax - countMin);
-        var color = [];
+        const color = [];
         for (var i = 0; i < 3; i++) {
             // calculate an integer color based on the delta
             color[i] = (high[i] - low[i]) * delta + low[i];
@@ -219,7 +215,7 @@ function initMap() {
         styles: mapStyles
     });
 
-    var gradient = [
+    const gradient = [
         'rgba(251, 233, 231, 0)',
         'rgba(251, 233, 231, 1)',
         'rgba(255, 204, 188, 1)',
@@ -301,8 +297,8 @@ function initMap() {
 
         $.get("/map/graffiti", function(data) {
             for (key in data) {
-                var pics = ['N1.png', 'Y1.png', 'C1.png', 'N2.png', 'Y2.png', 'C2.png', 'N3.png', 'Y3.png', 'C3.png', 'N4.png', 'Y4.png', 'C4.png', 'N5.png', 'Y5.png', 'C5.png'];
-                var graffitiDot = new google.maps.Marker({
+                const pics = ['N1.png', 'Y1.png', 'C1.png', 'N2.png', 'Y2.png', 'C2.png', 'N3.png', 'Y3.png', 'C3.png', 'N4.png', 'Y4.png', 'C4.png', 'N5.png', 'Y5.png', 'C5.png'];
+                let graffitiDot = new google.maps.Marker({
                     map: map4,
                     position: data[key].center,
                     icon: 'images/' + pics[Math.floor(Math.random() * 14) + 0]
@@ -315,3 +311,6 @@ function initMap() {
 
     });
 }
+
+
+export default initMap;
