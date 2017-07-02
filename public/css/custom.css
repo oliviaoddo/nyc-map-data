@@ -36,7 +36,7 @@
 
 }
 
-#noise-map, #firework-map{
+#noise-map, #graffiti-map{
   height: 100vh;
   width: 100vw;
 }
@@ -51,7 +51,7 @@
 }
 
 
-#rodent-map{
+#food-map{
   height: 100vh;
   width: 100%;
   position:absolute;
@@ -67,7 +67,7 @@
   opacity: .95;
 }
 
-#noise-container{
+#food-container{
   position: relative;
   z-index: 1; /* The z-index should be higher than Google Maps */
   margin: 15% auto 0;
@@ -85,12 +85,6 @@
     height: 100vh;
     width: 100%;
 }
-
-/*html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}*/
 
 button {
     background-color: transparent;

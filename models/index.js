@@ -6,7 +6,7 @@ const db = new Sequelize('rodents', 'root', 'Redmazda08!', {
 });
 
 
-var AllComplaints = db.define('all_complaints', {
+var Food = db.define('food', {
     date: Sequelize.STRING,
     type: Sequelize.STRING,
     zipcode: Sequelize.STRING,
@@ -48,7 +48,7 @@ var Graffiti = db.define('graffiti', {
 
 module.exports = {
     db: db,
-    AllComplaints: AllComplaints,
+    Food: Food,
     Noise: Noise,
     Graffiti: Graffiti,
 };

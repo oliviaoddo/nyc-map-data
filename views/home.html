@@ -1,55 +1,38 @@
-{% extends 'layout2.html'%}
+{% extends 'layout.html'%}
 {% block content %}
 <div id="home-map"></div>
 <div class="container center-align card  grey lighten-4" id="home-container">
-    <span class="home-text"></span><br>
-    <!-- <span class="sub-text"></span> -->
-<!--     <div class="container">
-        <div class="row">
-              <div class="card  teal lighten-2 card-fade center-align">
-                <div class="card-content white-text teal lighten-2"> -->
-<!--                     <form action="/visualize" method="GET" >
- --><!--                    <select name="viewData" id="change-data">
-                          <option value="" disabled selected>Choose your option</option>
-                          <option value="Rodent">Rodent Complaints</option>
-                          <option value="2">Noise Complaints</option>
-                          <option value="3">Complaints</option>
-                      </select> -->
-<!--               </div>
-      </div> -->
-<!--       </form>
- -->  <!-- </div> -->
-<!--   </div>
- --></div>
-  <div class="parallax-container">
+    <span class="home-text"></span>
+    <br>
+</div>
+<div class="parallax-container">
     <div class="parallax"><img src="images/ny2.JPG"></div>
-  </div>
-  <div class="section white" id="rodent-map">
-  </div>
-  <div class="row">
-  <div class="col m4 container" id="noise-container">
-  <div class="card grey lighten-2" id="noise-card">
-    <div class="card-content black-text grey lighten-4">
-        <span class="card-title">Food Establishment Complaints</span>
-        <span id="noise-hood"></span><br>
-        <span id="noise-count"></span>
+</div>
+<div class="section white" id="food-map">
+</div>
+<div class="row">
+    <div class="col m4 container" id="food-container">
+        <div class="card grey lighten-2" id="food-card">
+            <div class="card-content black-text grey lighten-4">
+                <span class="card-title">Food Establishment Complaints</span>
+                <span id="food-hood"></span>
+                <br>
+                <span id="food-count"></span>
+            </div>
+        </div>
     </div>
-    </div>
-  </div>
-  </div>
-  <div class="parallax-container">
+</div>
+<div class="parallax-container">
     <div class="parallax"><img src="images/ny3.JPG"></div>
-  </div>
-  <div class="section white" id="noise-map">
-
-  </div>
-  <div class="parallax-container">
+</div>
+<div class="section white" id="noise-map">
+</div>
+<div class="parallax-container">
     <div class="parallax"><img src="images/ny4.JPG"></div>
-  </div>
-  <div class="section white" id="firework-map">
-
-  </div>
-  <div class="parallax-container">
+</div>
+<div class="section white" id="graffiti-map">
+</div>
+<div class="parallax-container">
     <div class="parallax"><img src="images/ny5.JPG"></div>
-  </div>
+</div>
 {% endblock %}
