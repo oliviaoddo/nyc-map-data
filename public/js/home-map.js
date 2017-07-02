@@ -232,7 +232,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
             else if(percent <= 70) return orangeArr[6];
             else if(percent <= 80) return orangeArr[7];
             else if(percent <= 90) return orangeArr[8];
-            else if(percent <= 100) return orangeArr[9];
+            else return orangeArr[9];
         }
         function styleFeature(feature) {
 
@@ -299,7 +299,7 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
             styles: mapStyles
         });
 
-         map4 = new google.maps.Map(document.getElementById('firework-map'), {zoom: 12, center: {lat: 40.7831, lng: -73.9712}, zoomControl: false,
+         map4 = new google.maps.Map(document.getElementById('firework-map'), {zoom: 12, center: {lat: 40.6535528, lng: -73.9476001}, zoomControl: false,
           scrollwheel: false,
           disableDefaultUI: true,
             styles: mapStyles
@@ -358,11 +358,34 @@ var countMin = Number.MAX_VALUE, countMax = -Number.MAX_VALUE;
             //   center: data[key].center,
             //   radius: 100
             // });
-
             var ratDot = new google.maps.Marker({
               map: map3,
               position: data[key].center,
               icon: 'images/icon3.png'
+
+            });
+
+            }
+        });
+
+
+        $.get("/map/graffiti", function(data){
+            for(key in data){
+            // var cityCircle = new google.maps.Circle({
+            // strokeColor: '#ffb74d',
+            //   strokeOpacity: 0,
+            //   strokeWeight: 1,
+            //   fillColor: '#ffb74d',
+            //   fillOpacity: 0.3,
+            //   map: map3,
+            //   center: data[key].center,
+            //   radius: 100
+            // });
+            var pics = ['N1.png','Y1.png', 'C1.png','N2.png', 'Y2.png', 'C2.png', 'N3.png', 'Y3.png', 'C3.png', 'N4.png', 'Y4.png', 'C4.png', 'N5.png', 'Y5.png', 'C5.png'];
+            var graffitiDot = new google.maps.Marker({
+              map: map4,
+              position: data[key].center,
+              icon: 'images/' + pics[Math.floor(Math.random() * 14) + 0 ]
 
             });
 

@@ -90,18 +90,35 @@ router.get('/map/rodent', (req, res, next)=>{
 
 
 router.get('/map/graffiti', (req, res, next)=>{
-    // var complaintCenters = [];
-
+    var complaintCenters = {};
     models.Graffiti.findAll()
     .then(complaintArr=>{
-        return complaintArr.map(el => {
-            return el.location;
+        return complaintArr.forEach(el => {
+            complaintCenters[el.id] = {
+                center : {lat: Number(el.latitude), lng: Number(el.longitude)}
+            };
         });
     })
-    .then(heatMapLocations =>{
-        res.json(heatMapLocations);
+    .then(obj =>{
+        res.json(complaintCenters);
     })
     .catch(console.log);
 });
+
+
+// router.get('/map/graffiti', (req, res, next)=>{
+//     // var complaintCenters = [];
+
+//     models.Graffiti.findAll()
+//     .then(complaintArr=>{
+//         return complaintArr.map(el => {
+//             return el.location;
+//         });
+//     })
+//     .then(heatMapLocations =>{
+//         res.json(heatMapLocations);
+//     })
+//     .catch(console.log);
+// });
 
 module.exports = router;
