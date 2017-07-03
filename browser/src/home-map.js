@@ -60,7 +60,7 @@ function initMap() {
 
     map2 = new google.maps.Map(document.getElementById('food-map'), {
         zoom: 12,
-        center: { lat: 40.7831, lng: -73.9712 },
+        center: { lat: 40.7831, lng: -73.9512 },
         zoomControl: true,
         scrollwheel: false,
         disableDefaultUI: true,
@@ -70,7 +70,7 @@ function initMap() {
     map3 = new google.maps.Map(document.getElementById('noise-map'), {
         zoom: 12,
         center: { lat: 40.7831, lng: -73.9712 },
-        zoomControl: false,
+        zoomControl: true,
         scrollwheel: false,
         disableDefaultUI: true,
         styles: mapThreeStyle
@@ -95,7 +95,7 @@ function initMap() {
     map4 = new google.maps.Map(document.getElementById('graffiti-map'), {
         zoom: 12,
         center: { lat: 40.6535528, lng: -73.9676001 },
-        zoomControl: false,
+        zoomControl: true,
         scrollwheel: false,
         disableDefaultUI: true,
         styles: mapFourStyle
