@@ -1,147 +1,8 @@
+import {mapThreeStyle, mapStyles, mapFourStyle } from './mapStyles.js';
+
 let map, map2, map3, map4, heatmap;
 
 
-const mapStyles = [{
-    "elementType": "geometry",
-    "stylers": [{
-        "color": "#f5f5f5"
-    }]
-}, {
-    "elementType": "labels.icon",
-    "stylers": [{
-        "visibility": "off"
-    }]
-}, {
-    "elementType": "labels.text.fill",
-    "stylers": [{
-        "color": "#616161"
-    }]
-}, {
-    "elementType": "labels.text.stroke",
-    "stylers": [{
-        "color": "#f5f5f5"
-    }]
-}, {
-    "featureType": "administrative.land_parcel",
-    "elementType": "labels.text.fill",
-    "stylers": [{
-        "color": "#bdbdbd"
-    }]
-}, {
-    "featureType": "landscape.natural.terrain",
-    "elementType": "geometry.fill",
-    "stylers": [{
-        "color": "#d9efee"
-    }, {
-        "weight": 1.5
-    }]
-}, {
-    "featureType": "poi",
-    "elementType": "geometry",
-    "stylers": [{
-        "color": "#eeeeee"
-    }]
-}, {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [{
-        "color": "#757575"
-    }]
-}, {
-    "featureType": "poi.business",
-    "elementType": "geometry.fill",
-    "stylers": [{
-        "color": "#afebe7"
-    }]
-}, {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [{
-        "color": "#e5e5e5"
-    }]
-}, {
-    "featureType": "poi.park",
-    "elementType": "labels.text.fill",
-    "stylers": [{
-        "color": "#9e9e9e"
-    }]
-}, {
-    "featureType": "road",
-    "elementType": "geometry",
-    "stylers": [{
-        "color": "#ffffff"
-    }]
-}, {
-    "featureType": "road.arterial",
-    "elementType": "labels.text.fill",
-    "stylers": [{
-        "color": "#757575"
-    }]
-}, {
-    "featureType": "road.highway",
-    "elementType": "geometry",
-    "stylers": [{
-        "color": "#dadada"
-    }]
-}, {
-    "featureType": "road.highway",
-    "elementType": "geometry.fill",
-    "stylers": [{
-        "color": "#3caa9c"
-    }, {
-        "saturation": 20
-    }, {
-        "weight": 0.5
-    }]
-}, {
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [{
-        "weight": 1
-    }]
-}, {
-    "featureType": "road.highway",
-    "elementType": "labels.text.fill",
-    "stylers": [{
-        "color": "#616161"
-    }]
-}, {
-    "featureType": "road.local",
-    "elementType": "labels.text.fill",
-    "stylers": [{
-        "color": "#9e9e9e"
-    }]
-}, {
-    "featureType": "transit.line",
-    "elementType": "geometry",
-    "stylers": [{
-        "color": "#e5e5e5"
-    }]
-}, {
-    "featureType": "transit.station",
-    "elementType": "geometry",
-    "stylers": [{
-        "color": "#eeeeee"
-    }]
-}, {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [{
-        "color": "#c9c9c9"
-    }]
-}, {
-    "featureType": "water",
-    "elementType": "geometry.fill",
-    "stylers": [{
-        "color": "#d9efee"
-    }]
-}, {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [{
-        "color": "#9e9e9e"
-    }]
-}];
 
 let countMin = Number.MAX_VALUE,
     countMax = -Number.MAX_VALUE;
@@ -150,16 +11,16 @@ function initMap() {
     const blueArr = ['#e0f2f1', '#b2dfdb', '#80cbc4', '#4db6ac', '#26a69a', '#009688', '#00897b', '#00796b', '#00695c', '#004d40'];
 
     function getColor(percent) {
-        if (percent <= 10) return orangeArr[0];
-        else if (percent <= 20) return orangeArr[1];
-        else if (percent <= 30) return orangeArr[2];
-        else if (percent <= 40) return orangeArr[3];
-        else if (percent <= 50) return orangeArr[4];
-        else if (percent <= 60) return orangeArr[5];
-        else if (percent <= 70) return orangeArr[6];
-        else if (percent <= 80) return orangeArr[7];
-        else if (percent <= 90) return orangeArr[8];
-        else return orangeArr[9];
+        if (percent <= 10) return blueArr[0];
+        else if (percent <= 20) return blueArr[1];
+        else if (percent <= 30) return blueArr[2];
+        else if (percent <= 40) return blueArr[3];
+        else if (percent <= 50) return blueArr[4];
+        else if (percent <= 60) return blueArr[5];
+        else if (percent <= 70) return blueArr[6];
+        else if (percent <= 80) return blueArr[7];
+        else if (percent <= 90) return blueArr[8];
+        else return blueArr[9];
     }
 
     function styleFeature(feature) {
@@ -212,7 +73,7 @@ function initMap() {
         zoomControl: false,
         scrollwheel: false,
         disableDefaultUI: true,
-        styles: mapStyles
+        styles: mapThreeStyle
     });
 
     const gradient = [
@@ -233,11 +94,11 @@ function initMap() {
 
     map4 = new google.maps.Map(document.getElementById('graffiti-map'), {
         zoom: 12,
-        center: { lat: 40.6535528, lng: -73.9476001 },
+        center: { lat: 40.6535528, lng: -73.9676001 },
         zoomControl: false,
         scrollwheel: false,
         disableDefaultUI: true,
-        styles: mapStyles
+        styles: mapFourStyle
     });
 
 
@@ -296,7 +157,7 @@ function initMap() {
 
 
         $.get("/map/graffiti", function(data) {
-            for (key in data) {
+            for (let key in data) {
                 const pics = ['N1.png', 'Y1.png', 'C1.png', 'N2.png', 'Y2.png', 'C2.png', 'N3.png', 'Y3.png', 'C3.png', 'N4.png', 'Y4.png', 'C4.png', 'N5.png', 'Y5.png', 'C5.png'];
                 let graffitiDot = new google.maps.Marker({
                     map: map4,
@@ -311,6 +172,5 @@ function initMap() {
 
     });
 }
-
-
+window.initMap = initMap;
 export default initMap;

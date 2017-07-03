@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/map/food', (req, res, next) => {
-    const neighborhoods = require('../public/js/zip-neighborhoods');
+    const neighborhoods = require('../browser/js/zip-neighborhoods');
     let complaintCount = [
         ['count', 'name']
     ];

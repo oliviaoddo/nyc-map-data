@@ -36,31 +36,39 @@
 
 }
 
-#noise-map, #graffiti-map{
-  height: 100vh;
-  width: 100vw;
-}
-
 #home-map{
   height: 75vh;
   width: 100%;
   position:absolute;
   top: 0;
   left: 0;
-  z-index: 0;  /*Set z-index to 0 as it will be on a layer below the contact form*/
+  z-index: 1;  /*Set z-index to 0 as it will be on a layer below the contact form*/
 }
 
+#noise-map{
+  height: 100vh;
+  width: 100%;
+  position:absolute;
+  z-index: 1;  /*Set z-index to 0 as it will be on a layer below the contact form*/
+}
 
 #food-map{
   height: 100vh;
   width: 100%;
   position:absolute;
-  z-index: 0;  /*Set z-index to 0 as it will be on a layer below the contact form*/
+  z-index: 1;  /*Set z-index to 0 as it will be on a layer below the contact form*/
+}
+
+#graffiti-map{
+  height: 100vh;
+  width: 100%;
+  position:absolute;
+  z-index: 1;  /*Set z-index to 0 as it will be on a layer below the contact form*/
 }
 
 #home-container{
   position: relative;
-  z-index: 1; /* The z-index should be higher than Google Maps */
+  z-index: 2; /* The z-index should be higher than Google Maps */
   margin: 15% auto 0;
   padding: 2%;
   height: auto;
@@ -69,13 +77,35 @@
 
 #food-container{
   position: relative;
-  z-index: 1; /* The z-index should be higher than Google Maps */
+  z-index: 2; /* The z-index should be higher than Google Maps */
   margin: 15% auto 0;
   padding: 2%;
   height: auto;
   opacity: .95;
   margin-left: 5%;
 }
+
+#noise-container{
+  position: relative;
+  z-index: 2; /* The z-index should be higher than Google Maps */
+  margin: 15% auto 0;
+  padding: 2%;
+  height: auto;
+  opacity: .95;
+  margin-left: 5%;
+}
+
+#graffiti-container{
+  position: relative;
+  z-index: 2; /* The z-index should be higher than Google Maps */
+  margin: 15% auto 0;
+  padding: 2%;
+  height: auto;
+  opacity: .95;
+  margin-left: 5%;
+}
+
+
 
 #next{
     margin-top: 30px;
@@ -97,7 +127,12 @@ button:focus {
 }
 
 .parallax-container {
-    height: 650px;
+    height: 800px;
+    z-index: 0;
   }
 
-
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
