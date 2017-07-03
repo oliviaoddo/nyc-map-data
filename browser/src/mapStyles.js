@@ -571,4 +571,20 @@ const mapStyles = [{
 }];
 
 
-export {mapThreeStyle, mapStyles, mapFourStyle } ;
+const gradient = [
+    'rgba(251, 233, 231, 0)',
+    'rgba(251, 233, 231, 1)',
+    'rgba(255, 204, 188, 1)',
+    'rgba(255, 171, 145, 1)',
+    'rgba(255, 138, 101, 1)',
+    'rgba(255, 112, 67, 1)',
+    'rgba(255, 87, 34, 1)',
+    'rgba(244, 81, 30, 1)',
+    'rgba(230, 74, 25, 1)',
+    'rgba(216, 67, 21, 1)',
+    'rgba(191, 54, 12, 1)',
+]
+
+const graffitiPics = ['N1.png', 'Y1.png', 'C1.png', 'N2.png', 'Y2.png', 'C2.png', 'N3.png', 'Y3.png', 'C3.png', 'N4.png', 'Y4.png', 'C4.png', 'N5.png', 'Y5.png', 'C5.png'];
+
+export { mapThreeStyle, mapStyles, mapFourStyle, gradient, graffitiPics } ;
